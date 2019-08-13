@@ -7,6 +7,7 @@ CONFIG_DIR="/etc/"
 if [ ! whoami == "root" ]; then
 	printf "ERROR: Please run as root.\n"
 	exit
+fi
 
 # check required folders exist
 if [ ! -d $BIN_DIR ]; then
@@ -19,7 +20,7 @@ if [ ! -d $CONFIG_DIR ]; then
 	exit
 fi
 
-# make config folder
+# make token configs folder
 if [ ! -d $CONFIG_DIR"rhsso-token/" ]; then
 	mkdir $CONFIG_DIR"rhsso-token/"
 fi
