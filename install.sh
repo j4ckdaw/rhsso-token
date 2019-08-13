@@ -35,3 +35,12 @@ chmod +x $BIN_DIR'rhsso-token'
 # TODO: autocomplete stuff
 
 # TODO: dependencies stuff
+
+#=========
+# RUN LOGS
+# ┌─[sfish@nimbus] - [~/Code/Personal/rhsso-token] - [10043]
+# └─[$] sudo ./install.sh
+# Password:
+# Created token config directory in /etc/
+# cp: /usr/bin/rhsso-token: Operation not permitted
+# chmod: /usr/bin/rhsso-token: No such file or directory

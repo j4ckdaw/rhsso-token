@@ -1,11 +1,11 @@
 #!/bin/bash
 
-CONFIG_DIR="/etc/rhsso-token/"
-
+CONFIG_DIR="$HOME/.rhsso-token/"					       # Could use a hidden directory under $HOME, e.g. ~/.rhsso-token
+									       # That'd save the need for sudo on a lot of things
 main() {
 	FILE=$1.yaml
 	if [ ! -f $CONFIG_DIR$FILE ]; then
-              printf "ERROR: Failed to load config file."
+              printf "ERROR: Failed to load config file."		       # Would it be good to suggest options to the user here?
               exit
       	fi
 
@@ -36,7 +36,7 @@ main() {
 }
 
 show-help() {
-	printf "Usage: rhsso-token [OPTION] [NAME]\n"
+	printf "Usage: rhsso-token [OPTIONS] [NAME]\n"
 	printf "Fetches an RHSSO token using a defined config.\n\n"
 
 	printf "OPTIONS:\n"
@@ -63,23 +63,23 @@ list-configs() {
 add-config() {
 	user=$(whoami)
 	if [ ! $user == "root" ]; then
-        	printf "ERROR: Run as root to add a token config.\n"
+        	printf "ERROR: Run as root to add a token config.\n"	       # Can be stripped out with change to $CONFIG_DIR
         	exit
 	fi
 
 	FILE=$1.yaml
 	if [ -f $CONFIG_DIR$FILE ]; then
-		printf "ERROR: token config with this name exists already.\n"
+		printf "ERROR: token config with this name exists already.\n"  # Could add --force for this to allow the user to overwrite?
 		printf "You can remove it with 'rhsso-token -r NAME\n"
 		exit
 	else 
-        	read -p "Enter client_id: " client_id
+        	read -p "Enter client_id: " client_id			       # read -p doesn't seem to work on Macs - they run BSD
         	read -p "Enter username: " username
 		read -p "Enter host: " host
 		read -p "Enter realm: " realm
 
-		echo "\"client_id\": \"$client_id\"" > $CONFIG_DIR$FILE
-		echo "\"username\": \"$username\"" > $CONFIG_DIR$FILE
+		echo "\"client_id\": \"$client_id\"" > $CONFIG_DIR$FILE	       # > overwrites, >> appends
+		echo "\"username\": \"$username\"" > $CONFIG_DIR$FILE	       # Also, this doesn't know how to bail out if $CONFIG_DIR doesn't exist
 		echo "\"host\": \"$host\"" > $CONFIG_DIR$FILE
 		echo "\"realm\": \"$realm\"" > $CONFIG_DIR$FILE
 
@@ -124,3 +124,17 @@ else
        main $1 
        exit
 fi
+
+#========
+# RUN LOGS
+# ┌─[sfish@nimbus] - [~/Code/Personal/rhsso-token] - [10048]
+# └─[$] rhsso-token.sh
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 107: [: ==: unary operator expected
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 107: [: ==: unary operator expected
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 110: [: ==: unary operator expected
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 110: [: ==: unary operator expected
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 113: [: ==: unary operator expected
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 113: [: ==: unary operator expected
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 116: [: ==: unary operator expected
+# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 116: [: ==: unary operator expected
+# ERROR: Failed to load config file.%
