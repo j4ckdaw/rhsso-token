@@ -4,7 +4,8 @@ BIN_DIR="/usr/bin/"
 CONFIG_DIR="/etc/"
 
 # check program was run as root
-if [ ! whoami == "root" ]; then
+user=$(whoami)
+if [ ! $user == "root" ]; then
 	printf "ERROR: Please run as root.\n"
 	exit
 fi
@@ -23,7 +24,12 @@ fi
 # make token configs folder
 if [ ! -d $CONFIG_DIR"rhsso-token/" ]; then
 	mkdir $CONFIG_DIR"rhsso-token/"
+	printf "Created token config directory in /etc/\n"
 fi
+
+# put executable on path and make it usable
+cp rhsso-token.sh $BIN_DIR'rhsso-token'
+chmod +x $BIN_DIR'rhsso-token'
 
 # TODO: autocomplete stuff
 
