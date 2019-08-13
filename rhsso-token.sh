@@ -54,39 +54,46 @@ show-help() {
 }
 
 list-configs() {
-	FILES=$CONFIG_DIR*
+	FILES=$CONFIG_DIR'*'
 	for f in $FILES; do
 		basename $f .yaml
 	done
 }
 
 add-config() {
+	user=$(whoami)
+	if [ ! $user == "root" ]; then
+        	printf "ERROR: Run as root to add a token config.\n"
+        	exit
+	fi
+
 	FILE=$1.yaml
 	if [ -f $CONFIG_DIR$FILE ]; then
 		printf "ERROR: token config with this name exists already.\n"
 		printf "You can remove it with 'rhsso-token -r NAME\n"
 		exit
 	else 
-		printf "Enter client_id: "
-        	read -s client_id
-        	printf "\nEnter username: "
-        	read -s username
-		printf "\nEnter host: "
-		read -s host
-		printf "\nEnter realm: "
-		read -s realm
-        	printf "\n"
+        	read -p "Enter client_id: " client_id
+        	read -p "Enter username: " username
+		read -p "Enter host: " host
+		read -p "Enter realm: " realm
 
 		echo "\"client_id\": \"$client_id\"" > $CONFIG_DIR$FILE
 		echo "\"username\": \"$username\"" > $CONFIG_DIR$FILE
 		echo "\"host\": \"$host\"" > $CONFIG_DIR$FILE
 		echo "\"realm\": \"$realm\"" > $CONFIG_DIR$FILE
 
-		printf "Added token config."	
+		printf "Added token config.\n"	
 	fi
 }
 
 remove-config() {
+	user=$(whoami)
+        if [ ! $user == "root" ]; then
+                printf "ERROR: Run as root to remove a token config.\n"
+                exit
+        fi
+
 	FILE=$1.yaml
         if [ ! -f $CONFIG_DIR$FILE ]; then
               printf "ERROR: No such token config exists.\n"

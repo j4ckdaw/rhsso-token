@@ -25,6 +25,7 @@ fi
 if [ ! -d $CONFIG_DIR"rhsso-token/" ]; then
 	mkdir $CONFIG_DIR"rhsso-token/"
 	printf "Created token config directory in /etc/\n"
+	chmod +w $CONFIG_DIR'rhsso-token/'
 fi
 
 # put executable on path and make it usable
