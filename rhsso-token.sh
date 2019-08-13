@@ -42,15 +42,15 @@ show-help() {
 	printf "OPTIONS:\n"
 	printf "  -a, --add       add a token config called NAME\n"
 	printf "  -r, --remove    remove the token config called NAME\n"
-	printf "  -l, --list      list all token configs"
+	printf "  -l, --list      list all token configs\n"
 	printf "  -h, --help      display this help and exit\n\n"
 
 	printf "EXAMPLES:\n"
 	printf "  rhsso-token -a foo        add a token config called 'foo'\n"
 	printf "  rhsso-token -r bar        remove the token config called 'bar'\n"
 	printf "  rhsso-token -l            list all token configs\n"
-	printf "  TOKEN=\$(rhsso-token baz) get token using config 'baz'\n"
-	printf "                           and store it in \$TOKEN\n"
+	printf "  TOKEN=\$(rhsso-token baz)  get token using config 'baz'\n"
+	printf "                            and store it in \$TOKEN\n"
 }
 
 list-configs() {
