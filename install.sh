@@ -1,7 +1,7 @@
 #!/bin/bash
 
-BIN_DIR="/usr/bin/"
-CONFIG_DIR="/etc/"
+BIN_DIR="/usr/local/bin/"
+CONFIG_DIR="$HOME"
 
 # check program was run as root
 user=$(whoami)
@@ -22,10 +22,11 @@ if [ ! -d $CONFIG_DIR ]; then
 fi
 
 # make token configs folder
-if [ ! -d $CONFIG_DIR"rhsso-token/" ]; then
-	mkdir $CONFIG_DIR"rhsso-token/"
-	printf "Created token config directory in /etc/\n"
-	chmod +w $CONFIG_DIR'rhsso-token/'
+if [ ! -d $CONFIG_DIR"/.rhsso-token/" ]; then
+	mkdir $CONFIG_DIR"/.rhsso-token/"
+	printf "Created token config directory in $CONFIG_DIR\n"
+else
+	printf "Config folder already exists."
 fi
 
 # put executable on path and make it usable
