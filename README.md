@@ -16,7 +16,7 @@ _To install:_
 
 _Getting started:_
 
-- <code>$ rhsso-token -a foo</code>
+- <code>$ rhsso-token --add foo</code>
 - <code>$ TOKEN=$(rhsso-token foo)</code>
 - You can now use TOKEN in future API calls.
 
