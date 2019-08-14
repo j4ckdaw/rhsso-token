@@ -2,6 +2,10 @@
 
 **Retrieval of Red Hat SSO tokens using user-defined config files**
 
+_Dependencies:_
+- yq
+- jq
+
 _To install:_
 
 - <code>$ cd rhsso-token</code>

@@ -49,5 +49,3 @@ else
 	exit
 fi
 printf "Installation complete\n"
-
-# TODO: dependencies stuff
