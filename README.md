@@ -10,6 +10,12 @@ _To install:_
 - Optionally, <code>$ rm -r rhsso-token</code>
 - Optionally, <code>$ rhsso-token --help</code>
 
+_Getting started:_
+
+- <code>$ rhsso-token -a foo</code>
+- <code>$ TOKEN=$(rhsso-token foo)</code>
+- You can now use TOKEN in future API calls.
+
 _To uninstall:_
 
 - <code>$ sudo rm /usr/local/bin/rhsso-token</code>

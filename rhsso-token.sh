@@ -146,18 +146,4 @@ else
     ensure-config-dir 
     main $1 
     exit
-fi
-
-#========
-# RUN LOGS
-# ┌─[sfish@nimbus] - [~/Code/Personal/rhsso-token] - [10048]
-# └─[$] rhsso-token.sh
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 107: [: ==: unary operator expected
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 107: [: ==: unary operator expected
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 110: [: ==: unary operator expected
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 110: [: ==: unary operator expected
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 113: [: ==: unary operator expected
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 113: [: ==: unary operator expected
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 116: [: ==: unary operator expected
-# /Users/sfish/Code/Personal/scripts/rhsso-token.sh: line 116: [: ==: unary operator expected
-# ERROR: Failed to load config file.%
+fi 
