@@ -19,7 +19,8 @@ main() {
 
     # get sensitive data from user
     read -s -p "Enter password:" password
-    read -s -p "\nEnter client_secret:" client_secret
+    printf "\n" >&2
+    read -s -p "Enter client_secret:" client_secret
     printf "\n" >&2
 
     # curl the token
