@@ -1,7 +1,7 @@
 #!/bin/bash
 
 BIN_DIR="/usr/local/bin/"
-CONFIG_DIR="$HOME"
+CONFIG_DIR="$HOME/.rhsso-token/"
 
 # check program was run as root
 user=$(whoami)
@@ -10,38 +10,44 @@ if [ ! $user == "root" ]; then
 	exit
 fi
 
-# check required folders exist
+# check bin directory exists
 if [ ! -d $BIN_DIR ]; then
-	printf "ERROR: Bin folder does not exist.\n"
+	printf "ERROR: Bin directory: $BIN_DIR does not exist.\n"
 	exit
 fi
 
+# make token configs directory
 if [ ! -d $CONFIG_DIR ]; then
-	printf "ERROR: Config folder does not exist.\n"
+	mkdir -p $CONFIG_DIR
+	chown -R $SUDO_USER:$SUDO_USER $CONFIG_DIR
+	if [ -d $CONFIG_DIR ]; then
+		printf "Created configs directory: $CONFIG_DIR\n"
+	else
+		printf "ERROR: Failed to create configs directory: $CONFIG_DIR\n"
+		exit
+	fi
+else
+	printf "Config directory: $CONFIG_DIR already exists\n"
+fi
+
+# put scrpit on path and make it executable
+executable_location=$BIN_DIR'rhsso-token'
+
+cp rhsso-token.sh $executable_location
+if [ -f "$executable_location" ]; then
+        printf "Script copied onto path\n"
+else 
+	printf "ERROR: Failed to copy script to path\n"
 	exit
 fi
 
-# make token configs folder
-if [ ! -d $CONFIG_DIR"/.rhsso-token/" ]; then
-	mkdir $CONFIG_DIR"/.rhsso-token/"
-	printf "Created token config directory in $CONFIG_DIR\n"
-else
-	printf "Config folder already exists."
+chmod +x $executable_location
+if [[ -x "$executable_location" ]]; then
+	printf "Script made executable\n"
+else 
+	printf "ERROR: Failed to make script executable\n"
+	exit
 fi
-
-# put executable on path and make it usable
-cp rhsso-token.sh $BIN_DIR'rhsso-token'
-chmod +x $BIN_DIR'rhsso-token'
-
-# TODO: autocomplete stuff
+printf "Installation complete\n"
 
 # TODO: dependencies stuff
-
-#=========
-# RUN LOGS
-# ┌─[sfish@nimbus] - [~/Code/Personal/rhsso-token] - [10043]
-# └─[$] sudo ./install.sh
-# Password:
-# Created token config directory in /etc/
-# cp: /usr/bin/rhsso-token: Operation not permitted
-# chmod: /usr/bin/rhsso-token: No such file or directory
